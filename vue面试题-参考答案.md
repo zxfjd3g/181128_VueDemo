@@ -1,3 +1,4 @@
+# day01
 ## 1. 说说MVVM设计模式
     M: Model(模型), vue中是data(为view提供数据)
     V: View(视图), vue中是模板页面(显示data中的数据)
@@ -71,4 +72,65 @@
     3). 方法与函数
         在对象内定义的常称为方法, 通过对象调用的常称为方法, 其它常称为函数
     
-      
+# day02
+## 1. 写出7个指令及其作用
+    v-text: 设置标签体文本
+    v-html: 设置标签体子标签
+    v-if/v-else/v-show: 显示/隐藏
+    v-for: 遍历显示列表
+    v-bind: 强制绑定表达式, 简写:
+    v-on: 绑定事件监听, 简写@
+    v-model: 双向数据绑定
+    
+## 2. 写出vue 7个配置选项及其作用
+    el: 最外层元素选择器
+    props: 声明接收哪些属性
+    data: 状态数据
+    computed: 计算属性
+    methods: 事件回调函数
+    watch: 监视属性变化
+    directives: 注册局部指令
+    filters: 注册局部过滤器
+    components: 配置组件
+    
+## 3. 说说vue的生命周期
+    1). 初始化
+       beforeCreate()
+       created()
+       beforeMount()
+       mounted(): 异步任务(发ajax请求/启动定时器)
+    2). 更新
+       beforeUpdate()
+       updated()
+    3). 死亡
+       beforeDestroy(): 收尾工作(清除定时器)
+       destroyed()
+
+## 4. 说说项目开发中常用的ES6新语法
+    定义变量/常量: const/let
+    解构赋值: let {a, b} = this.props / import {aa} from 'xxx' / function f ({name}) {}
+    对象的简洁表达: {a, b, c () {}}
+    箭头函数: 
+       组件的自定义方法: xxx = () => {}
+       匿名函数作为实参
+       优点:
+          * 简洁
+          * 没有自己的this,使用引用this查找的是外部this
+    扩展运算符: ...
+    类: class/extends/constructor/super
+    ES6模块化: export/default/import
+    异步: promise, async/await
+
+## 5. 比较函数的call()/apply()/bind()
+    1). call(obj, param1, param2)/apply(obj, [[param1, param2])
+       调用/执行函数
+       只是强制指定函数中的this为第一个参数指定的对象
+       如果函数执行需要传参数, call是依次传递, apply需要封装成数组传递
+    2). bind()
+       返回一个新函数, 不会自动执行, 需要手动执行
+       强制指定函数中的this为第一个参数指定的对象
+       新函数内部会原样调用原函数
+
+## 6. babel的插件和预设
+
+## 7. props和v-model

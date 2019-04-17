@@ -22,7 +22,7 @@
       add () {
         // 1. 得到输入数据
         const title = this.title.trim()
-        if(!title) {
+        if (!title) {
           return alert('必须输入')
         }
         // 2. 封装成todo对象

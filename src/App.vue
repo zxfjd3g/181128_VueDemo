@@ -19,7 +19,7 @@
         todos: [
           {completed: false, title: '吃饭'},
           {completed: true, title: '睡觉'},
-          {completed: false, title: '打代码'},
+          {completed: false, title: '打代码'}
         ]
       }
     },
@@ -43,6 +43,7 @@
     width: 600px;
     margin: 0 auto;
   }
+
   .todo-container .todo-wrap {
     padding: 10px;
     border: 1px solid #ddd;

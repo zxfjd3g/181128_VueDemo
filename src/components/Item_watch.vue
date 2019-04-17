@@ -19,6 +19,7 @@
       return {
         bgColor: 'white',
         isShow: false,
+        completed: false
       }
     },
 
@@ -51,17 +52,17 @@
       }
     },
 
-    computed: {
-      completed: {
-        get () {
-          console.log('get()')
-          return this.todo.completed
-        },
+    watch: {
+      // 监视
+      completed (value) {
+        console.log('watch completed')
+        // this.todo.completed = value
+        this.selectTodo(this.todo, value)
+      },
 
-        set (value) {
-          console.log('set()')
-          this.selectTodo(this.todo, value)
-        }
+      'todo.completed' (value) {
+        console.log('watch todo.completed')
+        this.completed = value
       }
     }
   }

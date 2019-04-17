@@ -7,10 +7,10 @@
   export default {
 
     props: {
-      /*addTodo: { // 指定属性名, 属性值的类型, 属性性的必要性
+      addTodo: { // 指定属性名, 属性值的类型, 属性性的必要性
         type: Function,
         reuired: true
-      }*/
+      }
     },
     data () {
       return {
@@ -32,9 +32,7 @@
           completed: false
         }
         // 3. 调用 addTodo添加todo并显示
-        // this.addTodo(todo)
-        // 分发事件
-        this.$emit('addTodo', todo)
+        this.addTodo(todo)
 
         // 4. 清除输入
         this.title = ''

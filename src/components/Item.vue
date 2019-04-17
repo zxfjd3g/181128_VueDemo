@@ -8,12 +8,14 @@
   </li>
 </template>
 <script>
+  import PubSub from 'pubsub-js'
+  import vm from '../vm'
+
   export default {
     props: { // 指定了属性名, 属性值的类型
       todo: Object,
-      deleteTodo: Function,
+      // deleteTodo: Function,
       index: Number,
-      selectTodo: Function
     },
     data () {
       return {
@@ -46,7 +48,9 @@
 
       deleteItem () {
         if (confirm('确定删除吗?')) {
-          this.deleteTodo(this.index)
+          // this.deleteTodo(this.index)
+          // 发布消息
+          PubSub.publish('deleteTodo', this.index)
         }
       }
     },
@@ -60,7 +64,8 @@
 
         set (value) {
           console.log('set()')
-          this.selectTodo(this.todo, value)
+          // this.selectTodo(this.todo, value)
+          vm.$emit('selectTodo', this.todo, value)
         }
       }
     }

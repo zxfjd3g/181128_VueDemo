@@ -2,12 +2,19 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header @addTodo="addTodo"/>
-      <Main :todos="todos" :deleteTodo="deleteTodo" :selectTodo="selectTodo"/>
-      <Footer :todos="todos" :slectAllTodos="slectAllTodos" :deleteAllCompleted="deleteAllCompleted"/>
+      <Main :todos="todos"/>
+      <Footer>
+        <input slot="left" type="checkbox" v-model="checkAll"/>
+        <span slot="middle">已完成{{completedCount}} / 全部{{todos.length}}</span>
+        <button slot="right" class="btn btn-danger" v-show="completedCount>0" @click="deleteAllCompleted">清除已完成任务</button>
+      </Footer>
     </div>
   </div>
 </template>
 <script>
+  import PubSub from 'pubsub-js'
+
+  import vm from './vm'
   // import Header from './components/Header.vue'
   import Main from './components/Main.vue'
   import Footer from './components/Footer.vue'
@@ -19,6 +26,37 @@
       return {
         todos: storageUtils.getTodos()
       }
+    },
+
+    mounted () {
+      // 订阅消息
+      PubSub.subscribe('deleteTodo', (msgName, index) => {
+        this.deleteTodo(index)
+      })
+      // 绑定自定义监听
+      vm.$on('selectTodo', (todo, isCheck) => {
+        this.selectTodo(todo, isCheck)
+      })
+    },
+
+    computed: {
+      // 已完成的数量
+      completedCount () {
+        return this.todos.reduce((pre, todo) => pre + (todo.completed ? 1 : 0), 0)
+      },
+
+      // 是否全全选
+      checkAll: {
+        get () {
+          return this.todos.length=== this.completedCount && this.completedCount>0
+        },
+
+        set (val) {//  勾选状态已经发生了改变
+          // 更新todos中所有todo的completed值
+          this.slectAllTodos(val)
+        }
+      }
+
     },
 
     methods: {

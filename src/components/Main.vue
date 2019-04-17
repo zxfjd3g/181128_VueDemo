@@ -1,7 +1,7 @@
 <template>
   <!--组件中的模板能直接访问组件对象的属性-->
   <ul class="todo-main">
-    <Item v-for="(todo, index) in todos" :key="index" :todo="todo"/>
+    <Item v-for="(todo, index) in todos" :key="index" :todo="todo" :deleteTodo="deleteTodo" :index="index"/>
   </ul>
 </template>
 <script>
@@ -11,7 +11,7 @@
     // 声明接收什么属性: 属性名
     // 所有接收的属性都会成为组件对象属性
     // 组件对象相当于一个小的vm
-    props: ['todos'],
+    props: ['todos', 'deleteTodo'],
     components: {
       Item
     }

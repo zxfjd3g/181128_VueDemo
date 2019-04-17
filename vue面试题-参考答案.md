@@ -91,7 +91,7 @@
     watch: 监视属性变化
     directives: 注册局部指令
     filters: 注册局部过滤器
-    components: 配置组件
+    components: 局部注册组件
     
 ## 3. 说说vue的生命周期
     1). 初始化
@@ -107,6 +107,9 @@
        destroyed()
 
 ## 4. 说说项目开发中常用的ES6新语法
+    比较简单
+    比较重要/有点难度的
+
     定义变量/常量: const/let
     解构赋值: let {a, b} = this.props / import {aa} from 'xxx' / function f ({name}) {}
     对象的简洁表达: {a, b, c () {}}
@@ -126,11 +129,15 @@
        调用/执行函数
        只是强制指定函数中的this为第一个参数指定的对象
        如果函数执行需要传参数, call是依次传递, apply需要封装成数组传递
-    2). bind()
+    2). bind(obj)
        返回一个新函数, 不会自动执行, 需要手动执行
-       强制指定函数中的this为第一个参数指定的对象
-       新函数内部会原样调用原函数
+       新函数内部会通过原函数对象的call来调用原本的函数, 并指定函数的this为obj
+       如果直接调用原来函数, this没有绑定为obj
 
 ## 6. babel的插件和预设
-
+    未来版本 ECMAScript 标准经历五个阶段：Strawman（稻草人），Proposal（提议），Draft（草案），Candidate（候选）以及 Finished （完成）
+    babel中有相应的预设包: stage 0、stage 1、stage 2、stage 3、stage 4 
+    
 ## 7. props和v-model
+
+

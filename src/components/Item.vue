@@ -55,6 +55,7 @@
     watch: {
       // 监视
       completed (value) {
+        console.log('completed()')
         // this.todo.completed = value
         this.selectTodo(this.todo, value)
       }

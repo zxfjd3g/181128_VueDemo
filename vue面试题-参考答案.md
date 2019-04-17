@@ -136,8 +136,30 @@
 
 ## 6. babel的插件和预设
     未来版本 ECMAScript 标准经历五个阶段：Strawman（稻草人），Proposal（提议），Draft（草案），Candidate（候选）以及 Finished （完成）
-    babel中有相应的预设包: stage 0、stage 1、stage 2、stage 3、stage 4 
+    也就是对应 stage0、stage1、stage2、stage3、stage4 五个阶段
+    babel常用的预设包:
+        es2015：包含 es2015 语法标准所有相关插件
+        es2016：包含 es2016 语法标准所有相关插件
+        es2017：包含 es2017 语法标准所有相关插件
+        latest：包含从 2015 开始历年语法标准所有相关插件
+        env：在 latest 基础上提供环境配置能力，比如可以配置只支持某一个浏览器的某几个版本，会自动按需启用、禁用插件
+        stage-0：包含处于标准提案 stage 0 阶段的语法所有相关插件
+        stage-1：包含处于标准提案 stage 1 阶段的语法所有相关插件
+        stage-2：包含处于标准提案 stage 2 阶段的语法所有相关插件
+        stage-3：包含处于标准提案 stage 3 阶段的语法所有相关插件
+    预设包与插件包的关系
+        一个插件包只能解析1种语法
+        预设包是n个插件包的的集合包
+    babel的配置: .babelrc
+        {
+          presets: [], // 配置所有需要的预设包
+          plugins: [], // 配置额外需要的插件包
+        }
     
 ## 7. props和v-model
+    问题: v-model指向父组件传入的属性, 会导致直接更新父组件的数据, 这违背了组件化开发单向数据流的基本原则
+    解决:
+        方法1: data + watch
+        方法2: get + set
 
 

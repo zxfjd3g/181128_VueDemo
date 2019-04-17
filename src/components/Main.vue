@@ -1,7 +1,7 @@
 <template>
   <!--组件中的模板能直接访问组件对象的属性-->
   <ul class="todo-main">
-    <Item v-for="(todo, index) in todos" :key="index" :todo="todo"
+    <Item v-for="(todo, index) in todos" :key="todo.title" :todo="todo"
           :deleteTodo="deleteTodo" :index="index" :selectTodo="selectTodo"/>
   </ul>
 </template>

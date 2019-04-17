@@ -1,7 +1,7 @@
 <template>
   <li :style="{background: bgColor}" @mouseenter="handleEnter(true)" @mouseleave="handleEnter(false)">
     <label>
-      <input type="checkbox" v-model="todo.completed"/>
+      <input type="checkbox" v-model="completed"/>
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" v-show="isShow" @click="deleteItem">删除</button>
@@ -12,13 +12,26 @@
     props: { // 指定了属性名, 属性值的类型
       todo: Object,
       deleteTodo: Function,
-      index: Number
+      index: Number,
+      selectTodo: Function
     },
     data () {
       return {
         bgColor: 'white',
-        isShow: false
+        isShow: false,
+        completed: false
       }
+    },
+
+    // 为第一次渲染显示做一个同步的准备工作
+    beforeMount () {
+      // 根据接收的todo来指定completed
+      this.completed = this.todo.completed
+    },
+
+    // 在第一次显示后, 立即做一个异步工作(发ajax请求, 启动定时器)
+    mounted () {
+      // this.completed = this.todo.completed
     },
 
     methods: {
@@ -36,6 +49,14 @@
         if (confirm('确定删除吗?')) {
           this.deleteTodo(this.index)
         }
+      }
+    },
+
+    watch: {
+      // 监视
+      completed (value) {
+        // this.todo.completed = value
+        this.selectTodo(this.todo, value)
       }
     }
   }

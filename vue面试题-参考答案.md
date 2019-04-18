@@ -226,21 +226,6 @@
     找到后查找对象上的b属性, 查找原型链, 如果找不到返回undefined
     
     
-var o1 = {m: 1}
-var o2 = o1
-
-function fn (o) {
-   o = {m: 2}
-   //o.m = 2
-}
-fn(o1)
-o1.m
-o2.m 
-o1 = 2
-
-
-    
-    
     
     
     

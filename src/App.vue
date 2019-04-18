@@ -1,113 +1,74 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <Header @addTodo="addTodo"/>
-      <Main :todos="todos"/>
-      <Footer>
-        <input slot="left" type="checkbox" v-model="checkAll"/>
-        <span slot="middle">已完成{{completedCount}} / 全部{{todos.length}}</span>
-        <button slot="right" class="btn btn-danger" v-show="completedCount>0" @click="deleteAllCompleted">清除已完成任务</button>
-      </Footer>
-    </div>
+  <div>
+    <h2 v-if="!repoName">LOAGING...</h2>
+    <h3 v-else>
+      most star repo is <a :href="repoUrl">{{repoName}}</a>
+    </h3>
   </div>
 </template>
 <script>
-  import PubSub from 'pubsub-js'
-
-  import vm from './vm'
-  // import Header from './components/Header.vue'
-  import Main from './components/Main.vue'
-  import Footer from './components/Footer.vue'
-  import storageUtils from './utils/storageUtils'
+  import axios from 'axios'
 
   export default {
-
     data () {
       return {
-        todos: storageUtils.getTodos()
+        repoName: '', // 仓库的名称
+        repoUrl: '', // 仓库的url
       }
     },
 
-    mounted () {
-      // 订阅消息
-      PubSub.subscribe('deleteTodo', (msgName, index) => {
-        this.deleteTodo(index)
-      })
-      // 绑定自定义监听
-      vm.$on('selectTodo', (todo, isCheck) => {
-        this.selectTodo(todo, isCheck)
-      })
-    },
+    async mounted () {
 
-    computed: {
-      // 已完成的数量
-      completedCount () {
-        return this.todos.reduce((pre, todo) => pre + (todo.completed ? 1 : 0), 0)
-      },
+      const url = `https://api.github.com/search/repositories2?q=v&sort=stars`
 
-      // 是否全全选
-      checkAll: {
-        get () {
-          return this.todos.length=== this.completedCount && this.completedCount>0
-        },
+      // 使用vue-resource发送异步ajax请求
+      /*this.$http.get(url).then(response => { // 请求成功了
+        // 取出数据
+        const result = response.data
+        const {name, html_url} = result.items[0]
+        // 更新状态数据
+        this.repoName = name
+        this.repoUrl = html_url
+      }).catch(error => { // 请求出错了
+        alert('请求出错了')
+      })*/
 
-        set (val) {//  勾选状态已经发生了改变
-          // 更新todos中所有todo的completed值
-          this.slectAllTodos(val)
-        }
+      // 使用axios发送异步ajax请求
+      /*axios.get(url).then(response => { // 请求成功了
+        // 取出数据
+        const result = response.data
+        const {name, html_url} = result.items[0]
+        // 更新状态数据
+        this.repoName = name
+        this.repoUrl = html_url
+      }).catch(error => { // 请求出错了
+        alert('请求出错了222')
+      })*/
+
+      try {
+        const response = await axios.get(url)
+        // 取出数据
+        const result = response.data
+        const {name, html_url} = result.items[0]
+        // 更新状态数据
+        this.repoName = name
+        this.repoUrl = html_url
+      } catch(error) { // reject(error)
+        alert('请求出错了222')
       }
 
-    },
-
-    methods: {
-      // 添加todo
-      addTodo (todo) {
-        this.todos.unshift(todo)
-      },
-
-      // 删除todo
-      deleteTodo (index) {
-        this.todos.splice(index, 1)
-      },
-
-      // 对所有todo进行全选或全不选
-      slectAllTodos (isCheck) {
-        this.todos.forEach(todo => todo.completed = isCheck)
-      },
-
-      // 删除所有已完成的
-      deleteAllCompleted () {
-        this.todos = this.todos.filter(todo => !todo.completed)
-      },
-
-      selectTodo (todo, isCheck) {
-        todo.completed = isCheck
-      }
-
-
-    },
-
-    watch: {
-      todos: {
-        deep: true, // 深度监视
-        /*handler: function (val) {  // todos发生了任何改变都会调用
-          // 将todos最新的值保存到local
-          // localStorage.setItem('todos_key', JSON.stringify(val))
-          storageUtils.saveTodos(val)
-        }*/
-        handler: storageUtils.saveTodos
-        /*handler: function (todos) {
-          localStorage.setItem('todos_key', JSON.stringify(todos))
-        }*/
-      }
-    },
-
-    components: {
-      // Header,
-      Main,
-      Footer
     }
   }
+
+  /*
+  1. async/await的作用
+     1). 简化promise的使用编码, 不通过then()/catch()来指定回调函数
+     2). 以同步编码方式实现异步流程
+  2. 哪里用await?
+     在返回promise的表达式的左侧  ===> 不想要promise, 而想要promise异步返回的成功的结果(reslove(response))
+  3. 哪里用async
+     await所在函数定义的左侧
+   */
 </script>
 <style>
   .todo-container {

@@ -225,8 +225,57 @@
     先查找a, 沿着作用域链查找, 找不到报错(变量未定义)
     找到后查找对象上的b属性, 查找原型链, 如果找不到返回undefined
     
-    
-    
+# day04
+## 1. 说说vue项目中如何与后台通信
+    1). 通过ajax请求与后台通信
+    2). 常用的库
+       vue-resource: vue的插件, 用于vue1.x
+       axios: 独立的第三方库, 用于vue2.x
+       fetch: 较新的原生方式, 但需要引入兼容包: fetch.js
+    3). 执行请求代码的时机
+       初始化异步显示: mounted()
+       特定用户操作后异步显示: 事件回调函数或相关函数中
+       
+## 2. 说说你对事件处理机制的理解
+    1). DOM事件
+       * 绑定事件监听
+          * 事件名(类型): 只有有限的几个, 不能随便写
+          * 回调函数: 接收包含相关数据的event, 处理事件
+       * 用户操作界面自动触发事件(event)
+          * 事件名(类型)
+          * 数据
+    2). 自定义事件(如vue自定义事件/pubsub等)
+       * 绑定事件监听
+          * 事件名(类型): 任意
+          * 回调函数: 通过形参接收数据, 在函数体处理事件
+       * 触发(emit)/分发(dispatch)事件(编码)
+          * 事件名(类型): 与绑定的事件监听的事件名一致
+          * 数据: 会自动传递给回调函数
+
+## 3. async/await的作用和使用
+    1). 作用?
+        简化pormise的使用(不用再使用then()/catch()来指定成功或失败的回调函数)
+        以同步编码的方式实现异步流程(没有回调函数)
+    2). 哪里使用await?
+        在返回promise对象的表达式左侧, 为了直接得到异步返回的结果, 而不是promsie对象
+    3). 哪里使用async?
+        使用了await的函数定义左侧
+
+## 4. GET请求的2种请求参数
+    1). query参数: 
+       路由path: /register
+       请求path: /register?username=xxx&password=yyy   
+       获取参数: req.query.username
+    2). param参数: 
+       路由path: /register/:username/:password
+       请求path: /register/xxx/123   
+       获取参数: req.params.username
+
+## 5. vm对象与组件对象的关系
+    1). 组件对象是Vue的子类型对象, Vue原型对象上的属性/方法所有组件对象都可以访问
+    2). 一旦将某个数据或行为添加到Vue原型对象上, 那所有组件中都可通过this轻松访问
+    3). 事件总线(EventBus)对象的存储: Vue.prototype.$eventBus = new Vue(), 在组件中直接访问: this.$eventBus
+
     
     
 

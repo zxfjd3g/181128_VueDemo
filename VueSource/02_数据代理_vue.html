@@ -6,6 +6,24 @@
 </head>
 <body>
 
+<div id="test">
 
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  const vm = new Vue({
+    el: '#test',
+    data: {
+      name: 'sadamu'
+    }
+  })
+
+  console.log(vm.name) // sadamu   // 代理读操作
+
+  vm.name = 'damu' // 保存在内部的data对象的name属性上  // 代理写操作
+  console.log(vm, vm._data.name) // damu
+
+</script>
 </body>
 </html>

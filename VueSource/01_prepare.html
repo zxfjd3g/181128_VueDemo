@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="test">尚硅谷IT教育</div>
+
+<div id="demo">
+  <ul>
+    <li>test1</li>
+    <li>test2</li>
+    <li>test3</li>
+    <li>test3</li>
+    <li>test3</li>
+    <li>test3</li>
+    <li>test3</li>
+  </ul>
+</div>
+
+
+
+<!--
+1. [].slice.call(lis): 将伪数组转换为真数组
+2. node.nodeType: 得到节点类型
+3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+-->
+
+<script type="text/javascript">
+  //1. [].slice.call(lis): 将伪数组转换为真数组
+  const lis = document.getElementsByTagName('li') // lis是一个伪数组
+  console.log(lis.forEach, lis instanceof Array) // undefined  false
+  const lis2 = Array.from(lis)
+  console.log(lis2.forEach, lis2 instanceof Array) // function对象, true
+  const lis3 = Array.prototype.slice.call(lis) // 相当于: lis.slice()
+  console.log(lis3.forEach, lis3 instanceof Array) // function对象, true
+  Array.prototype.slice.call(lis).forEach(li => console.log(li.innerHTML))
+
+
+  //2. node.nodeType: 得到节点类型
+  // <div id="test">尚硅谷IT教育</div>
+  const elementNode = document.getElementById('test')
+  const attrNode = elementNode.getAttributeNode('id')
+  const textNode = elementNode.firstChild // textNode==='尚硅谷IT教育'
+  console.log(elementNode.nodeType, attrNode.nodeType, textNode.nodeType)
+
+
+  //3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+  const p = {
+    firstName: 'A',
+    lastName: 'B'
+  }
+  Object.defineProperty(p, 'fullName', {
+    configurable: false, // 是否可以重新define
+    enumerable: false, // 是否可以枚举(for..in / keys())
+    // value: // 指定初始值
+    // writable: true/false // value是否可以修改
+    get () {
+      return this.firstName + '-' + this.lastName
+    },
+    set (value) {
+      const names = value.split('-')
+      this.firstName = names[0]
+      this.lastName = names[1]
+    }
+  })
+
+  //4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+  const names = Object.keys(p)
+  console.log(names)
+  //5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+  console.log(p.hasOwnProperty('fullName')) // true
+  console.log(p.hasOwnProperty('toString')) // false
+
+  //6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+  // 也是一种特别的节点
+  // 一个内存中用保存多个节点的容器, 它本身是不会进入页面的
+  /*
+  <div id="demo">
+    <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+    </ul>
+  </div>
+   */
+  // 创建一个fragment容器对象
+  const fragment = document.createDocumentFragment()
+
+  const div = document.getElementById('demo')
+  let child
+  // 将div中所有子节点转移到fragment容器中
+  while(child=div.firstChild) {
+    fragment.appendChild(child) // 此时界面有更新
+  }
+
+  // 更新fragment中所有li
+  const lis5 = fragment.children[0].children
+  Array.prototype.slice.call(lis5).forEach(li => {
+    li.innerHTML = 'atguigu'  // 界面不更新
+  })
+
+  // 将fragment到div中
+  div.appendChild(fragment) // 批量更新
+
+
+
+</script>
+</body>
+</html>

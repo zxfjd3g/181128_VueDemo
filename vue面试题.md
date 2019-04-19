@@ -30,3 +30,15 @@
 ## 3. async/await的作用和使用
 ## 4. GET请求的2种请求参数
 ## 5. vm对象与组件对象的关系
+
+# day05
+## 1. vue-router提供了哪些语法?
+## 2. 说说vue的数据代理
+## 3. 区别一般的HTTP请求与AJAX请求
+## 4. 说说debug调试
+## 5. 内存结构图(原型结构图)
+    function Foo () {}
+    const fn1 = new Foo()
+    const fn2 = new Foo()
+    const o1 = {}
+    const o2 = new Object()

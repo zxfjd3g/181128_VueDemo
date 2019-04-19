@@ -17,8 +17,11 @@
       <div class="col-xs-6">
         <div class="panel">
           <div class="panel-body">
-            <!--显示当前路由组件-->
-            <router-view/>
+            <!--缓存通过router-view它显示的路由组件对象-->
+            <keep-alive>
+              <!--显示当前路由组件-->
+              <router-view msg="abc"/>
+            </keep-alive>
           </div>
         </div>
       </div>

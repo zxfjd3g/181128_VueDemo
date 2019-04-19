@@ -5,6 +5,7 @@ import About from '../pages/About.vue'
 import Home from '../pages/Home.vue'
 import News from '../pages/News.vue'
 import Message from '../pages/Message.vue'
+import MessageDetail from '../pages/MessageDetail.vue'
 
 export default [
   {
@@ -21,7 +22,13 @@ export default [
       },
       {
         path: 'message',
-        component: Message
+        component: Message,
+        children: [
+          {
+            path: '/home/message/detail/:id',
+            component: MessageDetail
+          }
+        ]
       },
       {
         path: '',

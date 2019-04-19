@@ -6,7 +6,11 @@
   </ul>
 </template>
 <script>
-  export default {}
+  export default {
+    mounted () {
+      console.log('news mounted()')
+    }
+  }
 </script>
 <style scoped>
 

@@ -42,3 +42,19 @@
     const fn2 = new Foo()
     const o1 = {}
     const o2 = new Object()
+
+
+
+
+
+
+
+
+
+
+
+# day06
+## 1. 说说vue模板解析
+## 2. 说说数据绑定的理解和基本原理
+## 3. Vue实现数据双向绑定的原理
+## 4. Vue的MVVM实现结构图

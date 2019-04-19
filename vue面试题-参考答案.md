@@ -276,6 +276,65 @@
     2). 一旦将某个数据或行为添加到Vue原型对象上, 那所有组件中都可通过this轻松访问
     3). 事件总线(EventBus)对象的存储: Vue.prototype.$eventBus = new Vue(), 在组件中直接访问: this.$eventBus
 
+# day05
+## 1. vue-router提供了哪些语法?
+    1). 1个函数:
+        VueRouter: 路由构建函数, 用于创建路由器对象, 配置路由
+    2). 2个对象
+        $route: 代表当前路由的对象, 包含当前路由相关信息(path, params参数, query参数)
+        $router: 代表路由器对象, 包含控制路由跳转的方法(push/replce/back())
+    3). 2个标签
+        <router-link>: 路由链接, 生成路由链接
+        <router-view>: 路由视图, 显示当前路由组件
     
-    
+## 2. 说说vue的数据代理
+    1.通过一个对象(vm)代理对另一个对象(data)中属性的操作(读/写)
+    2.好处: 更方便的操作data中的数据
+    3.基本实现流程
+      1). 通过Object.defineProperty()给vm添加与data对象的属性对应的属性描述符
+      2). 所有添加的属性都包含getter/setter
+      3). 在getter/setter内部去操作data中对应的属性数据
+
+## 3. 区别一般的HTTP请求与AJAX请求
+    相同点: 都是向服务器提交的http请求
+    不同点:             
+                       --普通的HTTP--            --ajax请求--
+       得到             页面(一般)                json(一般)
+       浏览器处理响应    自动显示新数据页面         不会刷新/更新页面, 需要手动处理更新
+       数据渲染          服务器端                 浏览器端
+       应用类型         多页应用                  单页应用
+
+## 4. 说说debug调试
+    1). 调试的目的
+         1). 查找bug: 不断缩小可疑代码的范围
+         2). 查看程序的运行流程(用于熟悉新接手项目的代码)
+       
+    2). 如何开启调试模式
+         1). 添加语debugger句: 程序运行前     此方式用打包后才运行的项目
+         2). 添加(打)断点: 程序运行前或者过程中   此方式用运行源码js
+       
+    3). 如何进行调试操作
+         resume: 恢复程序执行(可能执行完或者进入下一个断点处)
+         step ove: 单步跳转, 尝试执行完当前语句, 进入下一条(如果内部有断点, 自动进入内部断点处)
+         step into: 跳入, 进入当前调用函数内部
+         step out: 跳出, 一次性执行完当前函数后面所有语句,并出去
+         deactivate breakpoints: 使所有断点暂时失效
+         
+         call stack: 显示是程序函数调用的过程
+         scope: 当前执行环境对应的作用域中包含的变量数据
+         breakpoints: 断点列表
+
+## 5. 内存结构图(原型结构图)
+    function Foo () {}  // new Function()
+    const fn1 = new Foo()
+    const fn2 = new Foo()
+    const o1 = {}
+    const o2 = new Object()
+![](https://i.imgur.com/jcjTXM4.png)
+
+/*
+执行函数
+执行函数定义
+*/
+
 

@@ -9,7 +9,7 @@
 </template>
 <script>
   import PubSub from 'pubsub-js'
-  import vm from '../vm'
+  // import vm from '../vm'
 
   export default {
     props: { // 指定了属性名, 属性值的类型
@@ -65,7 +65,7 @@
         set (value) {
           console.log('set()')
           // this.selectTodo(this.todo, value)
-          vm.$emit('selectTodo', this.todo, value)
+          this.$eventBus.$emit('selectTodo', this.todo, value)
         }
       }
     }

@@ -27,7 +27,14 @@
 </template>
 <script>
 
-  export default {}
+  import Vue from 'vue'
+
+  export default {
+    
+    mounted () {
+      console.log(this instanceof Vue, this, this.__proto__.__proto__===Vue.prototype)
+    }
+  }
 </script>
 <style>
 

@@ -14,7 +14,7 @@
 <script>
   import PubSub from 'pubsub-js'
 
-  import vm from './vm'
+  // import vm from './vm'
   // import Header from './components/Header.vue'
   import Main from './components/Main.vue'
   import Footer from './components/Footer.vue'
@@ -34,9 +34,15 @@
         this.deleteTodo(index)
       })
       // 绑定自定义监听
-      vm.$on('selectTodo', (todo, isCheck) => {
+      this.$eventBus.$on('selectTodo', (todo, isCheck) => {
         this.selectTodo(todo, isCheck)
       })
+    },
+
+    beforeDestroy () {
+      // 解绑事件监听
+      this.$eventBus.$off('selectTodo') // 解除指定的
+      this.$eventBus.$off() // 解除所有
     },
 
     computed: {

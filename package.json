@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-component": "^1.1.1",
+    "mint-ui": "^2.2.13",
     "pubsub-js": "^1.7.0",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.1",

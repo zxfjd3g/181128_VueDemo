@@ -17,6 +17,7 @@ export default [
     component: Home,
     children: [
       {
+        name: 'news',
         path: '/home/news',
         component: News
       },

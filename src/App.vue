@@ -11,6 +11,7 @@
   export default {
     methods: {
       test () {
+        debugger
         MessageBox('提示', '操作成功');
       }
     }

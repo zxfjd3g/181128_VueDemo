@@ -132,16 +132,20 @@ var compileUtil = {
 
   // 编译v-model
   model: function (node, vm, exp) {
+    // 设置节点value属性值, 创建对应的watcher
     this.bind(node, vm, exp, 'model');
 
     var me = this,
+      // 得到表达式对应的值
       val = this._getVMVal(vm, exp);
+    // 给节点绑定input监听(当输入发生任何改变时自动调用)
     node.addEventListener('input', function (e) {
+      // 得到最新输入的值
       var newValue = e.target.value;
       if (val === newValue) {
         return;
       }
-
+      // 将最新值设置表达式在data中对应的属性上 ===> 数据绑定更新节点的流程
       me._setVMVal(vm, exp, newValue);
       val = newValue;
     });

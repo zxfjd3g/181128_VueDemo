@@ -187,13 +187,13 @@
 	2.模板解析的基本流程:
 		1). 将el的所有子节点取出, 添加到一个新建的文档fragment对象中
 		2). 对fragment中的所有层次子节点递归进行编译解析处理
-	    	* 对表达式文本节点进行解析
+	    	* 对插值文本节点进行解析
 	    	* 对元素节点的指令属性进行解析
 	        	* 事件指令解析
 	        	* 一般指令解析
-	  	3). 将解析后的fragment添加到el中显示
-	3.解析表达式文本节点: textNode.textContent = value
-	  	1). 根据正则对象得到匹配出的表达式字符串: 子匹配/RegExp.$1
+    3). 将解析后的fragment添加到el中显示
+	3.解析插值文本节点: textNode.textContent = value
+	  	1). 根据正则对象得到匹配出的表达式: 子匹配/RegExp.$1
 	  	2). 从data中取出表达式对应的属性值
 	  	3). 将属性值设置为文本节点的textContent
 	4.事件指令解析: elementNode.addEventListener(事件名, 回调函数.bind(vm))

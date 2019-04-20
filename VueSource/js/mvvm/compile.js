@@ -166,7 +166,8 @@ var compileUtil = {
      */
     updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
-    new Watcher(vm, exp, function (value, oldValue) {
+    // 为每个表达式创建对应的watcher  ==> 用于将来更新节点
+    new Watcher(vm, exp, function (value, oldValue) { // 指定更新节点的回调函数
       updaterFn && updaterFn(node, value, oldValue);
     });
   },

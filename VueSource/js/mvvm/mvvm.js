@@ -17,6 +17,7 @@ function MVVM(options) {
 
   observe(data, this);
 
+  // 创建一个compile编译对象(编译模板: 初始化显示页面)
   this.$compile = new Compile(options.el || document.body, this)
 }
 

@@ -36,7 +36,7 @@ const mutations = {
 
  */
 const actions = {
-  increment ({commit}) {
+  /*increment ({commit}) {
     // 提交mutation: 执行commit(), 触发对应的mutation调用
     commit('INCREMENT')
   },
@@ -44,7 +44,7 @@ const actions = {
   decrement ({commit}) {
     // 提交mutation: 执行commit(), 触发对应的mutation调用
     commit('DECREMENT')
-  },
+  },*/
 
   incrementIfOdd ({commit, state}) {
     if (state.count %2 === 1) {

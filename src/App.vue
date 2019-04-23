@@ -1,54 +1,18 @@
 <template>
-  <div>
-    <p>click {{count}} times, count is {{evenOrOdd}}</p>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
-    <button @click="incrementIfOdd">increment if odd</button>
-    <button @click="incrementAsync"> increment async</button>
+  <div class="container">
+    <Search/>
+    <Main/>
   </div>
 </template>
 <script>
-
-  import {mapState, mapGetters, mapActions} from 'vuex'
+  import Search from './components/Search.vue'
+  import Main from './components/Main.vue'
 
   export default {
-
-    computed: {
-      ...mapState(['count']),  // {'count' () {return this.$store.state['count']}}
-      /*...mapState({
-        count2: 'count'
-      }),*/
-      ...mapGetters(['evenOrOdd']), // {'evenOrOdd' () {return this.$store.getters['evenOrOdd']}}
-    },
-
-    methods: {
-      ...mapActions(['increment', 'decrement', 'incrementIfOdd', 'incrementAsync'])
+    components: {
+      Search,
+      Main
     }
-
-    /*computed: {
-      count () {
-        return this.$store.state.count
-      },
-      evenOrOdd () {
-        return this.$store.getters.evenOrOdd
-      }
-    },*/
-
-    /*methods: {
-      increment() {
-        this.$store.commit('INCREMENT') // 触发对应的mutation调用
-      },
-      decrement() {
-        this.$store.commit('DECREMENT')
-      },
-      incrementIfOdd() {
-        this.$store.dispatch('incrementIfOdd')  // 触发对应的action调用
-      },
-      incrementAsync() {
-        console.log('---')
-        this.$store.dispatch('incrementAsync')
-      },
-    }*/
   }
 </script>
 <style>

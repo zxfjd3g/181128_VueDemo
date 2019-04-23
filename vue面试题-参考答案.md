@@ -330,11 +330,37 @@
     const fn2 = new Foo()
     const o1 = {}
     const o2 = new Object()
-![](https://i.imgur.com/jcjTXM4.png)
+![](http://baocangwh.cn/t6/702/1555977496x2890173947.png)
 
-/*
-执行函数
-执行函数定义
-*/
 
+# day06
+## 1. 说说vue模板解析
+    1). 目的
+       实现初始化显示
+    2). 整体流程
+       1. 将el的所有子节点取出, 添加到一个新建的文档fragment对象中
+       2. 对fragment中的所有层次子节点递归进行编译解析处理
+       3. 将解析后的fragment添加到el中显示
+    3). 编译/解析包含大括号表达式的文本节点: textNode.textContent = value
+    4). 编译事件指令: elementNode.addEventListener('eventName', callback)
+    5). 编译一般指令: elementNode.xxx = value
+
+## 2. 说说数据绑定的理解和基本原理
+    1). 作用:
+       实现数据的更新显示
+    2). 基本原理:  数据劫持 + 订阅者-发布者
+       a.在observer中, 通过Object.defineProperterty()给data中所有属性添加setter/getter, 实现数据劫持
+       b.为每个data中的属性创建一个对应的dep对象(订阅器)
+       c.为模板中的每个表达式创建对应的watcher对象(订阅者), 并关联到对应的dep上
+       d.一旦data中的数据发生变化, setter(发布者)会通过dep对象通知所有关联的watcher, watcher收到通知后就更新对应的节点
+
+## 3. Vue实现数据双向绑定的原理
+    1). 双向数据绑定是单向数据绑定的基础上的, 所以先简单说清单向数据绑定, 再说双向
+    2). vue单向数据绑的实现：
+        数据劫持 + 订阅者-发布者模式的方式，
+        通过Object.defineProperty()来劫持/监视data中的属性，在数据变动时发布消息给所有订阅者，每个订阅者去更新对应的DOM节点。
+    3). 双向绑定: 给元素绑定input监听, 一旦输入改变了, 将最新的值保存到对应的属性上
+
+## 4. Vue的MVVM实现结构图
+![](http://baocangwh.cn/t6/702/1555977325x2890173947.png)
 

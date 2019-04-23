@@ -9,32 +9,22 @@
 </template>
 <script>
 
-  import {mapState, mapGetters, mapActions} from 'vuex'
-
   export default {
 
-    computed: {
-      ...mapState(['count']),  // {'count' () {return this.$store.state['count']}}
-      /*...mapState({
-        count2: 'count'
-      }),*/
-      ...mapGetters(['evenOrOdd']), // {'evenOrOdd' () {return this.$store.getters['evenOrOdd']}}
+    mounted () {
+      console.log(this.$store)
     },
 
-    methods: {
-      ...mapActions(['increment', 'decrement', 'incrementIfOdd', 'incrementAsync'])
-    }
-
-    /*computed: {
+    computed: {
       count () {
         return this.$store.state.count
       },
       evenOrOdd () {
         return this.$store.getters.evenOrOdd
       }
-    },*/
+    },
 
-    /*methods: {
+    methods: {
       increment() {
         this.$store.commit('INCREMENT') // 触发对应的mutation调用
       },
@@ -45,10 +35,9 @@
         this.$store.dispatch('incrementIfOdd')  // 触发对应的action调用
       },
       incrementAsync() {
-        console.log('---')
         this.$store.dispatch('incrementAsync')
       },
-    }*/
+    }
   }
 </script>
 <style>

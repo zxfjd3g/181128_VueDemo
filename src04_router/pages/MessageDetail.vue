@@ -3,6 +3,7 @@
     <li>id: {{messageDetail.id}}</li>
     <li>title: {{messageDetail.title}}</li>
     <li>content: {{messageDetail.content}}</li>
+    <li><span>{{id1}}---{{id2}}</span></li>
   </ul>
 </template>
 <script>
@@ -13,6 +14,9 @@
   ]
 
   export default {
+
+    props: ['id1', 'id2'],
+
     data () {
       return {
         messageDetail: {}
@@ -23,13 +27,14 @@
     mounted () {
       console.log('detail mounted()')
       // 根据请求参数id查找对应的detail对象
-      const id = this.$route.params.id - 0
+      const id = this.id1 - 0
       this.showDetail(id)
     },
 
     watch: {
       $route (value) { // 说明请求路径参数变了
-        const id = value.params.id * 1
+        // const id = value.params.id * 1
+        const id = this.id1*1
         this.showDetail(id)
       }
     },

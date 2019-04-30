@@ -15,7 +15,17 @@
   </div>
 </template>
 <script>
-  export default {}
+  import {mixin1} from '../mixins'
+
+  export default {
+    mixins: [mixin1],
+
+    methods: {
+      test2 () {
+        console.log('test2()')
+      }
+    }
+  }
 </script>
 <style scoped>
 
